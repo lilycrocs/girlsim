@@ -13,6 +13,7 @@ let isWearingSkirt = false;
 let isWearingTopp = false;
 let isWearingSweater = false;
 let isWearingShirt = false;
+let gameOver = false;
 
 let score = 0;
 let button
@@ -62,7 +63,17 @@ function setup() {
 
     button = createButton("I'm done!",);
     button.position(700, 30);
-    button.mousePressed(showText)
+    button.mousePressed(done) 
+
+    // if (dist(flats.x, flats.y, flatsCenter.x, flatsCenter.y) < 15) {
+    //     flats.position = flatsCenter
+    //     if (isWearingFlats == false) {
+    //         score -= 3
+    //     }
+    //     isWearingFlats = true;
+    // } else {
+    //     isWearingFlats = false;
+    // }
 
     title = new Sprite(220, 85);
     title.img = titleImg;
@@ -255,15 +266,21 @@ function setup() {
     shirt.overlaps(sweater);
 }
 
-function showText() {
-    text("test", 100, 100)
-}
-
 function draw() {
     clear();
     background(230, 170, 185);
 
-    // text(score, 20, 40)
+    text(score, 20, 40)
+
+    if (gameOver == true) {
+        if (score <= 0) {
+            text("test", 25, 50)
+    } else {
+        if (score >= 0) {
+            text("gleep", 25, 50)
+        }
+    }
+}
 
     if (flats.mouse.dragging()) {
         flats.moveTowards(
@@ -775,12 +792,12 @@ function draw() {
     }
 }
 
-// function sayText () {
-//     if(sweater.position < sweaterCenter + 1) for (let i = 0; i < 5; i++) {
-//         push();
-//         fill(0);
-//         translate(random(width), random(height));
-//         text("AREN'T YOU HOT?", 0, 0);
-//         pop();
-//       }
-// }
+function done () {
+    if (button.mousePressed()) {
+        if (gameOver == false) {
+            gameOver = true
+        } else {
+            gameOver = false
+        }
+    }
+}
