@@ -15,19 +15,20 @@ let isWearingSweater = false;
 let isWearingShirt = false;
 
 let score = 0;
+let button
 
-let heelTextPosition1, heelTextPosition2, heelTextPosition3, heelTextPosition4, heelTextPosition5, heelTextPosition6, heelTextPosition7;
-let turtleneckTextPosition1, turtleneckTextPosition2, turtleneckTextPosition3, turtleneckTextPosition4, turtleneckTextPosition5, turtleneckTextPosition6, turtleneckTextPosition7;
-let corsetTextPosition1, corsetTextPosition2, corsetTextPosition3, corsetTextPosition4, corsetTextPosition5, corsetTextPosition6, corsetTextPosition7;
-let tanktopTextPosition1, tanktopTextPosition2, tanktopTextPosition3, tanktopTextPosition4, tanktopTextPosition5, tanktopTextPosition6, tanktopTextPosition7;
-let shortshortsTextPosition1, shortshortsTextPosition2, shortshortsTextPosition3, shortshortsTextPosition4, shortshortsTextPosition5, shortshortsTextPosition6, shortshortsTextPosition7;
-let shortsTextPosition1, shortsTextPosition2, shortsTextPosition3, shortsTextPosition4, shortsTextPosition5, shortsTextPosition6, shortsTextPosition7;
-let miniskirtTextPosition1, miniskirtTextPosition2, miniskirtTextPosition3, miniskirtTextPosition4, miniskirtTextPosition5, miniskirtTextPosition6, miniskirtTextPosition7;
-let sweatsTextPosition1, sweatsTextPosition2, sweatsTextPosition3, sweatsTextPosition4, sweatsTextPosition5, sweatsTextPosition6, sweatsTextPosition7;
-let skirtTextPosition1, skirtTextPosition2, skirtTextPosition3, skirtTextPosition4, skirtTextPosition5, skirtTextPosition6, skirtTextPosition7;
-let toppTextPosition1, toppTextPosition2, toppPosition3, toppTextPosition4, toppTextPosition5, toppTextPosition6, toppTextPosition7;
-let sweaterTextPosition1, sweaterTextPosition2, sweaterTextPosition3, sweaterTextPosition4, sweaterTextPosition5, sweaterTextPosition6, sweaterTextPosition7;
-let shirtTextPosition1, shirtTextPosition2, shirtTextPosition3, shirtTextPosition4, shirtTextPosition5, shirtTextPosition6, shirtTextPosition7;
+let heelTextPosition1, heelTextPosition2, heelTextPosition3, heelTextPosition4, heelTextPosition5, heelTextPosition6, heelTextPosition7, heelTextPosition8, heelTextPosition9, heelTextPosition10;
+let turtleneckTextPosition1, turtleneckTextPosition2, turtleneckTextPosition3, turtleneckTextPosition4, turtleneckTextPosition5, turtleneckTextPosition6, turtleneckTextPosition7, turtleneckTextPosition8, turtleneckTextPosition9, turtleneckTextPosition10;
+let corsetTextPosition1, corsetTextPosition2, corsetTextPosition3, corsetTextPosition4, corsetTextPosition5, corsetTextPosition6, corsetTextPosition7, corsetTextPosition8, corsetTextPosition9, corsetTextPosition10;
+let tanktopTextPosition1, tanktopTextPosition2, tanktopTextPosition3, tanktopTextPosition4, tanktopTextPosition5, tanktopTextPosition6, tanktopTextPosition7, tanktopTextPosition8, tanktopTextPosition9, tanktopTextPosition10;
+let shortshortsTextPosition1, shortshortsTextPosition2, shortshortsTextPosition3, shortshortsTextPosition4, shortshortsTextPosition5, shortshortsTextPosition6, shortshortsTextPosition7, shortshortsTextPosition8, shortshortsTextPosition9, shortshortsTextPosition10;
+let shortsTextPosition1, shortsTextPosition2, shortsTextPosition3, shortsTextPosition4, shortsTextPosition5, shortsTextPosition6, shortsTextPosition7, shortsTextPosition8, shortsTextPosition9, shortsTextPosition10;
+let miniskirtTextPosition1, miniskirtTextPosition2, miniskirtTextPosition3, miniskirtTextPosition4, miniskirtTextPosition5, miniskirtTextPosition6, miniskirtTextPosition7, miniskirtTextPosition8, miniskirtTextPosition9, miniskirtTextPosition10;
+let sweatsTextPosition1, sweatsTextPosition2, sweatsTextPosition3, sweatsTextPosition4, sweatsTextPosition5, sweatsTextPosition6, sweatsTextPosition7, sweatsTextPosition8, sweatsTextPosition9, sweatsTextPosition10;
+let skirtTextPosition1, skirtTextPosition2, skirtTextPosition3, skirtTextPosition4, skirtTextPosition5, skirtTextPosition6, skirtTextPosition7, skirtTextPosition8, skirtTextPosition9, skirtTextPosition10;
+let toppTextPosition1, toppTextPosition2, toppPosition3, toppTextPosition4, toppTextPosition5, toppTextPosition6, toppTextPosition7, toppTextPosition8, toppTextPosition9, toppTextPosition10;
+let sweaterTextPosition1, sweaterTextPosition2, sweaterTextPosition3, sweaterTextPosition4, sweaterTextPosition5, sweaterTextPosition6, sweaterTextPosition7, sweaterTextPosition8, sweaterTextPosition9, sweaterTextPosition10;
+let shirtTextPosition1, shirtTextPosition2, shirtTextPosition3, shirtTextPosition4, shirtTextPosition5, shirtTextPosition6, shirtTextPosition7, shirtTextPosition8, shirtTextPosition9, shirtTextPosition10;
 
 function preload() {
     titleImg = loadImage("assets/girlsimtitle.png");
@@ -53,7 +54,15 @@ function preload() {
 function setup() {
     canvas = new Canvas(800,600);
 
-    allSprites.drag = 5;
+    allSprites.drag = 10;
+
+    textFont(font);
+    textSize(25)
+    fill('red');
+
+    button = createButton("I'm done!",);
+    button.position(700, 30);
+    button.mousePressed(showText)
 
     title = new Sprite(220, 85);
     title.img = titleImg;
@@ -244,14 +253,17 @@ function setup() {
     shirt.overlaps(skirt);
     shirt.overlaps(topp);
     shirt.overlaps(sweater);
+}
 
-    textFont(font, 25);
-    fill('red');
+function showText() {
+    text("test", 100, 100)
 }
 
 function draw() {
     clear();
     background(230, 170, 185);
+
+    // text(score, 20, 40)
 
     if (flats.mouse.dragging()) {
         flats.moveTowards(
@@ -262,6 +274,9 @@ function draw() {
 
     if (dist(flats.x, flats.y, flatsCenter.x, flatsCenter.y) < 15) {
         flats.position = flatsCenter
+        if (isWearingFlats == false) {
+            score -= 3
+        }
         isWearingFlats = true;
     } else {
         isWearingFlats = false;
@@ -285,7 +300,10 @@ function draw() {
             heelTextPosition5 = createVector(random(width),random(height));
             heelTextPosition6 = createVector(random(width),random(height));
             heelTextPosition7 = createVector(random(width),random(height));
-            // score += 10;
+            heelTextPosition8 = createVector(random(width),random(height));
+            heelTextPosition9 = createVector(random(width),random(height));
+            heelTextPosition10 = createVector(random(width),random(height));
+            score += 3;
         }
         isWearingHeels = true;
     } else {
@@ -300,6 +318,9 @@ function draw() {
         text("YOU'RE TOO TALL FOR THOSE", heelTextPosition5.x, heelTextPosition5.y);
         text("YOU'RE TOO TALL FOR THOSE", heelTextPosition6.x, heelTextPosition6.y);
         text("YOU'RE TOO TALL FOR THOSE", heelTextPosition7.x, heelTextPosition7.y);
+        text("YOU'RE TOO TALL FOR THOSE", heelTextPosition8.x, heelTextPosition8.y);
+        text("YOU'RE TOO TALL FOR THOSE", heelTextPosition9.x, heelTextPosition9.y);
+        text("YOU'RE TOO TALL FOR THOSE", heelTextPosition10.x, heelTextPosition10.y);
     }
 
     if (converse.mouse.dragging()) {
@@ -311,40 +332,12 @@ function draw() {
 
     if (dist(converse.x, converse.y, converseCenter.x, converseCenter.y) < 15) {
         converse.position = converseCenter
+        if (isWearingConverse == false) {
+            score += 0;
+        }
         isWearingConverse = true;
     } else {
         isWearingConverse = false;
-    }
-
-    if (corset.mouse.dragging()) {
-        corset.moveTowards(
-            mouseX + corset.mouse.x, 
-            mouseY + corset.mouse.y, 
-            1);
-    }
-
-    if (dist(corset.x, corset.y, corsetCenter.x, corsetCenter.y) < 15) {
-        corset.position = corsetCenter
-        isWearingCorset = true; {
-            corsetTextPosition1 = createVector(random(width),random(height));
-            corsetTextPosition2 = createVector(random(width),random(height));
-            corsetTextPosition3 = createVector(random(width),random(height));
-            corsetTextPosition4 = createVector(random(width),random(height));
-            corsetTextPosition5 = createVector(random(width),random(height));
-            corsetTextPosition6 = createVector(random(width),random(height));
-            corsetTextPosition7 = createVector(random(width),random(height));
-            // score += 10;
-        }
-    } else {
-        isWearingCorset = false;
-    }
-    
-    if (isWearingCorset) {
-        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition1.x, corsetTextPosition1.y);
-        text("THAT'S HARDLY APPROPRIATE", 660, 440);
-        text("THAT'S HARDLY APPROPRIATE", 375, 480);
-        text("THAT'S HARDLY APPROPRIATE", 50, 420);
-        text("THAT'S HARDLY APPROPRIATE", 230, 100);
     }
 
     if (turtleneck.mouse.dragging()) {
@@ -356,17 +349,75 @@ function draw() {
 
     if (dist(turtleneck.x, turtleneck.y, turtleneckCenter.x, turtleneckCenter.y) < 15) {
         turtleneck.position = turtleneckCenter
+        if (isWearingTurtleneck == false) {
+            turtleneckTextPosition1 = createVector(random(width),random(height));
+            turtleneckTextPosition2 = createVector(random(width),random(height));
+            turtleneckTextPosition3 = createVector(random(width),random(height));
+            turtleneckTextPosition4 = createVector(random(width),random(height));
+            turtleneckTextPosition5 = createVector(random(width),random(height));
+            turtleneckTextPosition6 = createVector(random(width),random(height));
+            turtleneckTextPosition7 = createVector(random(width),random(height));
+            turtleneckTextPosition8 = createVector(random(width),random(height));
+            turtleneckTextPosition9 = createVector(random(width),random(height));
+            turtleneckTextPosition10 = createVector(random(width),random(height));
+            score += -4;
+        }
         isWearingTurtleneck = true;
     } else {
         isWearingTurtleneck = false;
     }
 
     if (isWearingTurtleneck) {
-        text("HOW OLD ARE YOU?", 640, 40);
-        text("HOW OLD ARE YOU?", 340, 410);
-        text("HOW OLD ARE YOU?", 520, 550);
-        text("HOW OLD ARE YOU?", 20, 410);
-        text("HOW OLD ARE YOU?", 80, 70);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition1.x, turtleneckTextPosition1.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition2.x, turtleneckTextPosition2.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition3.x, turtleneckTextPosition3.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition4.x, turtleneckTextPosition4.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition5.x, turtleneckTextPosition5.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition6.x, turtleneckTextPosition6.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition7.x, turtleneckTextPosition7.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition8.x, turtleneckTextPosition8.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition9.x, turtleneckTextPosition9.y);
+        text("HOW OLD ARE YOU?", turtleneckTextPosition10.x, turtleneckTextPosition10.y);
+    }
+
+    if (corset.mouse.dragging()) {
+        corset.moveTowards(
+            mouseX + corset.mouse.x, 
+            mouseY + corset.mouse.y, 
+            1);
+    }
+
+    if (dist(corset.x, corset.y, corsetCenter.x, corsetCenter.y) < 15) {
+        corset.position = corsetCenter
+        if (isWearingCorset == false) {
+            corsetTextPosition1 = createVector(random(width),random(height));
+            corsetTextPosition2 = createVector(random(width),random(height));
+            corsetTextPosition3 = createVector(random(width),random(height));
+            corsetTextPosition4 = createVector(random(width),random(height));
+            corsetTextPosition5 = createVector(random(width),random(height));
+            corsetTextPosition6 = createVector(random(width),random(height));
+            corsetTextPosition7 = createVector(random(width),random(height));
+            corsetTextPosition8 = createVector(random(width),random(height));
+            corsetTextPosition9 = createVector(random(width),random(height));
+            corsetTextPosition10 = createVector(random(width),random(height));
+            score += 5;
+        }
+        isWearingCorset = true;
+    } else {
+        isWearingCorset = false;
+    }
+    
+    if (isWearingCorset) {
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition1.x, corsetTextPosition1.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition2.x, corsetTextPosition2.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition3.x, corsetTextPosition3.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition4.x, corsetTextPosition4.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition5.x, corsetTextPosition5.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition6.x, corsetTextPosition6.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition7.x, corsetTextPosition7.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition8.x, corsetTextPosition8.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition9.x, corsetTextPosition9.y);
+        text("THAT'S HARDLY APPROPRIATE", corsetTextPosition10.x, corsetTextPosition10.y);
     }
 
     if (tanktop.mouse.dragging()) {
@@ -378,17 +429,35 @@ function draw() {
 
     if (dist(tanktop.x, tanktop.y, tanktopCenter.x, tanktopCenter.y) < 15) {
         tanktop.position = tanktopCenter
+        if (isWearingTanktop == false) {
+            tanktopTextPosition1 = createVector(random(width),random(height));
+            tanktopTextPosition2 = createVector(random(width),random(height));
+            tanktopTextPosition3 = createVector(random(width),random(height));
+            tanktopTextPosition4 = createVector(random(width),random(height));
+            tanktopTextPosition5 = createVector(random(width),random(height));
+            tanktopTextPosition6 = createVector(random(width),random(height));
+            tanktopTextPosition7 = createVector(random(width),random(height));
+            tanktopTextPosition8 = createVector(random(width),random(height));
+            tanktopTextPosition9 = createVector(random(width),random(height));
+            tanktopTextPosition10 = createVector(random(width),random(height));
+            score += 3;
+        }
         isWearingTanktop = true;
     } else {
         isWearingTanktop = false;
     }
 
     if (isWearingTanktop) {
-        text("COVER YOUR SHOULDERS", 500, 170);
-        text("COVER YOUR SHOULDERS", 230, 430);
-        text("COVER YOUR SHOULDERS", 460, 670);
-        text("COVER YOUR SHOULDERS", 640, 410);
-        text("COVER YOUR SHOULDERS", 10, 520);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition1.x, tanktopTextPosition1.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition2.x, tanktopTextPosition2.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition3.x, tanktopTextPosition3.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition4.x, tanktopTextPosition4.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition5.x, tanktopTextPosition5.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition6.x, tanktopTextPosition6.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition7.x, tanktopTextPosition7.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition8.x, tanktopTextPosition8.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition9.x, tanktopTextPosition9.y);
+        text("COVER YOUR SHOULDERS", tanktopTextPosition10.x, tanktopTextPosition10.y);
     }
 
     if (shortshorts.mouse.dragging()) {
@@ -400,17 +469,35 @@ function draw() {
 
     if (dist(shortshorts.x, shortshorts.y, shortshortsCenter.x, shortshortsCenter.y) < 15) {
         shortshorts.position = shortshortsCenter
+        if (isWearingShortshorts == false) {
+            shortshortsTextPosition1 = createVector(random(width),random(height));
+            shortshortsTextPosition2 = createVector(random(width),random(height));
+            shortshortsTextPosition3 = createVector(random(width),random(height));
+            shortshortsTextPosition4 = createVector(random(width),random(height));
+            shortshortsTextPosition5 = createVector(random(width),random(height));
+            shortshortsTextPosition6 = createVector(random(width),random(height));
+            shortshortsTextPosition7 = createVector(random(width),random(height));
+            shortshortsTextPosition8 = createVector(random(width),random(height));
+            shortshortsTextPosition9 = createVector(random(width),random(height));
+            shortshortsTextPosition10 = createVector(random(width),random(height));
+            score += 5;
+        }
         isWearingShortshorts = true;
     } else {
         isWearingShortshorts = false;
     }
 
     if (isWearingShortshorts) {
-        text("PUT SOME PANTS ON", 290, 50);
-        text("PUT SOME PANTS ON", 490, 130);
-        text("PUT SOME PANTS ON", 230, 390);
-        text("PUT SOME PANTS ON", 210, 580);
-        text("PUT SOME PANTS ON", 660, 480);
+        text("PUT SOME PANTS ON", shortshortsTextPosition1.x, shortshortsTextPosition1.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition2.x, shortshortsTextPosition2.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition3.x, shortshortsTextPosition3.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition4.x, shortshortsTextPosition4.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition5.x, shortshortsTextPosition5.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition6.x, shortshortsTextPosition6.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition7.x, shortshortsTextPosition7.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition8.x, shortshortsTextPosition8.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition9.x, shortshortsTextPosition9.y);
+        text("PUT SOME PANTS ON", shortshortsTextPosition10.x, shortshortsTextPosition10.y);
     }
 
     if (shorts.mouse.dragging()) {
@@ -422,17 +509,35 @@ function draw() {
 
     if (dist(shorts.x, shorts.y, shortsCenter.x, shortsCenter.y) < 15) {
         shorts.position = shortsCenter
+        if (isWearingShorts == false) {
+            shortsTextPosition1 = createVector(random(width),random(height));
+            shortsTextPosition2 = createVector(random(width),random(height));
+            shortsTextPosition3 = createVector(random(width),random(height));
+            shortsTextPosition4 = createVector(random(width),random(height));
+            shortsTextPosition5 = createVector(random(width),random(height));
+            shortsTextPosition6 = createVector(random(width),random(height));
+            shortsTextPosition7 = createVector(random(width),random(height));
+            shortsTextPosition8 = createVector(random(width),random(height));
+            shortsTextPosition9 = createVector(random(width),random(height));
+            shortsTextPosition10 = createVector(random(width),random(height));
+            score += 3;
+        }
         isWearingShorts = true;
     } else {
         isWearingShorts = false;
     }
 
     if (isWearingShorts) {
-        text("THOSE AREN'T IN DRESS CODE", 15, 130);
-        text("THOSE AREN'T IN DRESS CODE", 550, 100);
-        text("THOSE AREN'T IN DRESS CODE", 240, 340);
-        text("THOSE AREN'T IN DRESS CODE", 330, 560);
-        text("THOSE AREN'T IN DRESS CODE", 510, 320);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition1.x, shortsTextPosition1.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition2.x, shortsTextPosition2.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition3.x, shortsTextPosition3.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition4.x, shortsTextPosition4.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition5.x, shortsTextPosition5.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition6.x, shortsTextPosition6.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition7.x, shortsTextPosition7.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition8.x, shortsTextPosition8.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition9.x, shortsTextPosition9.y);
+        text("THOSE AREN'T IN DRESS CODE", shortsTextPosition10.x, shortsTextPosition10.y);
     }
 
     if (miniskirt.mouse.dragging()) {
@@ -444,17 +549,35 @@ function draw() {
 
     if (dist(miniskirt.x, miniskirt.y, miniskirtCenter.x, miniskirtCenter.y) < 15) {
         miniskirt.position = miniskirtCenter
+        if (isWearingMiniskirt == false) {
+            miniskirtTextPosition1 = createVector(random(width),random(height));
+            miniskirtTextPosition2 = createVector(random(width),random(height));
+            miniskirtTextPosition3 = createVector(random(width),random(height));
+            miniskirtTextPosition4 = createVector(random(width),random(height));
+            miniskirtTextPosition5 = createVector(random(width),random(height));
+            miniskirtTextPosition6 = createVector(random(width),random(height));
+            miniskirtTextPosition7 = createVector(random(width),random(height));
+            miniskirtTextPosition8 = createVector(random(width),random(height));
+            miniskirtTextPosition9 = createVector(random(width),random(height));
+            miniskirtTextPosition10 = createVector(random(width),random(height));
+            score += 5;
+        }
         isWearingMiniskirt = true;
     } else {
         isWearingMiniskirt = false;
     }
 
     if (isWearingMiniskirt) {
-        text("WHERE'S THE REST OF YOUR OUTFIT?", -10, 220);
-        text("WHERE'S THE REST OF YOUR OUTFIT?", 600, 210);
-        text("WHERE'S THE REST OF YOUR OUTFIT?", 450, 290);
-        text("WHERE'S THE REST OF YOUR OUTFIT?", 190, 530);
-        text("WHERE'S THE REST OF YOUR OUTFIT?", 530, 570);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition1.x, miniskirtTextPosition1.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition2.x, miniskirtTextPosition2.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition3.x, miniskirtTextPosition3.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition4.x, miniskirtTextPosition4.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition5.x, miniskirtTextPosition5.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition6.x, miniskirtTextPosition6.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition7.x, miniskirtTextPosition7.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition8.x, miniskirtTextPosition8.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition9.x, miniskirtTextPosition9.y);
+        text("WHERE'S THE REST OF YOUR OUTFIT?", miniskirtTextPosition10.x, miniskirtTextPosition10.y);
     }
 
     if (jeans.mouse.dragging()) {
@@ -466,6 +589,9 @@ function draw() {
 
     if (dist(jeans.x, jeans.y, jeansCenter.x, jeansCenter.y) < 15) {
         jeans.position = jeansCenter
+        if (isWearingJeans == false) {
+            score -= 2
+        }
         isWearingJeans = true;
     } else {
         isWearingJeans = false;
@@ -478,19 +604,37 @@ function draw() {
             1);
     }
 
-    if (isWearingSweats) {
-        text("ARE YOU SICK?", -15, 310);
-        text("ARE YOU SICK?", 500, 500);
-        text("ARE YOU SICK?", 420, 210);
-        text("ARE YOU SICK?", 250, 120);
-        text("ARE YOU SICK?", 630, 370);
-    }
-
     if (dist(sweats.x, sweats.y, sweatsCenter.x, sweatsCenter.y) < 15) {
         sweats.position = sweatsCenter
+        if (isWearingSweats == false) {
+            sweatsTextPosition1 = createVector(random(width),random(height));
+            sweatsTextPosition2 = createVector(random(width),random(height));
+            sweatsTextPosition3 = createVector(random(width),random(height));
+            sweatsTextPosition4 = createVector(random(width),random(height));
+            sweatsTextPosition5 = createVector(random(width),random(height));
+            sweatsTextPosition6 = createVector(random(width),random(height));
+            sweatsTextPosition7 = createVector(random(width),random(height));
+            sweatsTextPosition8 = createVector(random(width),random(height));
+            sweatsTextPosition9 = createVector(random(width),random(height));
+            sweatsTextPosition10 = createVector(random(width),random(height));
+            score -= 5;
+        }
         isWearingSweats = true;
     } else {
         isWearingSweats = false;
+    }
+
+    if (isWearingSweats) {
+        text("ARE YOU SICK?", sweatsTextPosition1.x, sweatsTextPosition1.y);
+        text("ARE YOU SICK?", sweatsTextPosition2.x, sweatsTextPosition2.y);
+        text("ARE YOU SICK?", sweatsTextPosition3.x, sweatsTextPosition3.y);
+        text("ARE YOU SICK?", sweatsTextPosition4.x, sweatsTextPosition4.y);
+        text("ARE YOU SICK?", sweatsTextPosition5.x, sweatsTextPosition5.y);
+        text("ARE YOU SICK?", sweatsTextPosition6.x, sweatsTextPosition6.y);
+        text("ARE YOU SICK?", sweatsTextPosition7.x, sweatsTextPosition7.y);
+        text("ARE YOU SICK?", sweatsTextPosition8.x, sweatsTextPosition8.y);
+        text("ARE YOU SICK?", sweatsTextPosition9.x, sweatsTextPosition9.y);
+        text("ARE YOU SICK?", sweatsTextPosition10.x, sweatsTextPosition10.y);
     }
 
     if (skirt.mouse.dragging()) {
@@ -502,6 +646,9 @@ function draw() {
 
     if (dist(skirt.x, skirt.y, skirtCenter.x, skirtCenter.y) < 15) {
         skirt.position = skirtCenter
+        if (isWearingSkirt == false) {
+            score -= 5
+        }
         isWearingSkirt = true;
     } else {
         isWearingSkirt = false;
@@ -516,17 +663,35 @@ function draw() {
 
     if (dist(topp.x, topp.y, toppCenter.x, toppCenter.y) < 15) {
         topp.position = toppCenter
+        if (isWearingTopp == false) {
+            toppTextPosition1 = createVector(random(width),random(height));
+            toppTextPosition2 = createVector(random(width),random(height));
+            toppTextPosition3 = createVector(random(width),random(height));
+            toppTextPosition4 = createVector(random(width),random(height));
+            toppTextPosition5 = createVector(random(width),random(height));
+            toppTextPosition6 = createVector(random(width),random(height));
+            toppTextPosition7 = createVector(random(width),random(height));
+            toppTextPosition8 = createVector(random(width),random(height));
+            toppTextPosition9 = createVector(random(width),random(height));
+            toppTextPosition10 = createVector(random(width),random(height));
+            score += 4;
+        }
         isWearingTopp = true;
     } else {
         isWearingTopp = false;
     }
 
     if (isWearingTopp) {
-        text("PUT A SHIRT ON", 520, 430);
-        text("PUT A SHIRT ON", 150, 490);
-        text("PUT A SHIRT ON", 290, 310);
-        text("PUT A SHIRT ON", 670, 150);
-        text("PUT A SHIRT ON", 350, 30);
+        text("PUT A SHIRT ON", toppTextPosition1.x, toppTextPosition1.y);
+        text("PUT A SHIRT ON", toppTextPosition2.x, toppTextPosition2.y);
+        text("PUT A SHIRT ON", toppTextPosition3.x, toppTextPosition3.y);
+        text("PUT A SHIRT ON", toppTextPosition4.x, toppTextPosition4.y);
+        text("PUT A SHIRT ON", toppTextPosition5.x, toppTextPosition5.y);
+        text("PUT A SHIRT ON", toppTextPosition6.x, toppTextPosition6.y);
+        text("PUT A SHIRT ON", toppTextPosition7.x, toppTextPosition7.y);
+        text("PUT A SHIRT ON", toppTextPosition8.x, toppTextPosition8.y);
+        text("PUT A SHIRT ON", toppTextPosition9.x, toppTextPosition9.y);
+        text("PUT A SHIRT ON", toppTextPosition10.x, toppTextPosition10.y);
     }
 
     if (sweater.mouse.dragging()) {
@@ -538,26 +703,36 @@ function draw() {
 
     if (dist(sweater.x, sweater.y, sweaterCenter.x, sweaterCenter.y) < 15) {
         sweater.position = sweaterCenter;
+        if (isWearingSweater == false) {
+            sweaterTextPosition1 = createVector(random(width),random(height));
+            sweaterTextPosition2 = createVector(random(width),random(height));
+            sweaterTextPosition3 = createVector(random(width),random(height));
+            sweaterTextPosition4 = createVector(random(width),random(height));
+            sweaterTextPosition5 = createVector(random(width),random(height));
+            sweaterTextPosition6 = createVector(random(width),random(height));
+            sweaterTextPosition7 = createVector(random(width),random(height));
+            sweaterTextPosition8 = createVector(random(width),random(height));
+            sweaterTextPosition9 = createVector(random(width),random(height));
+            sweaterTextPosition10 = createVector(random(width),random(height));
+            score -= 4;
+        }
         isWearingSweater = true;
     } else {
         isWearingSweater = false;
     }
 
     if(isWearingSweater) {
-        text("AREN'T YOU HOT?", 25, 40);
-        text("AREN'T YOU HOT?", 75, 350);
-        text("AREN'T YOU HOT?", 400, 150);
-        text("AREN'T YOU HOT?", 550, 400);
-        text("AREN'T YOU HOT?", 600, 250);
+        text("AREN'T YOU HOT?", sweaterTextPosition1.x, sweaterTextPosition1.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition2.x, sweaterTextPosition2.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition3.x, sweaterTextPosition3.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition4.x, sweaterTextPosition4.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition5.x, sweaterTextPosition5.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition6.x, sweaterTextPosition6.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition7.x, sweaterTextPosition7.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition8.x, sweaterTextPosition8.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition9.x, sweaterTextPosition9.y);
+        text("AREN'T YOU HOT?", sweaterTextPosition10.x, sweaterTextPosition10.y);
     }
-
-    // if(sweater.position < sweaterCenter + 1) for (let i = 0; i < 5; i++) {
-    //     push();
-    //     fill(0);
-    //     translate(random(width), random(height));
-    //     text("AREN'T YOU HOT?", 0, 0);
-    //     pop();
-    //   }
 
     if (shirt.mouse.dragging()) {
         shirt.moveTowards(
@@ -568,17 +743,35 @@ function draw() {
 
     if (dist(shirt.x, shirt.y, shirtCenter.x, shirtCenter.y) < 15) {
         shirt.position = shirtCenter
+        if (isWearingShirt == false) {
+            shirtTextPosition1 = createVector(random(width),random(height));
+            shirtTextPosition2 = createVector(random(width),random(height));
+            shirtTextPosition3 = createVector(random(width),random(height));
+            shirtTextPosition4 = createVector(random(width),random(height));
+            shirtTextPosition5 = createVector(random(width),random(height));
+            shirtTextPosition6 = createVector(random(width),random(height));
+            shirtTextPosition7 = createVector(random(width),random(height));
+            shirtTextPosition8 = createVector(random(width),random(height));
+            shirtTextPosition9 = createVector(random(width),random(height));
+            shirtTextPosition10 = createVector(random(width),random(height));
+            score -= 2;
+        }
         isWearingShirt = true;
     } else {
         isWearingShirt = false;
     }
 
     if (isWearingShirt) {
-        text("THAT DOESN'T FIT YOU", -5, 470);
-        text("THAT DOESN'T FIT YOU", 570, 690);
-        text("THAT DOESN'T FIT YOU", 200, 180);
-        text("THAT DOESN'T FIT YOU", 310, 300);
-        text("THAT DOESN'T FIT YOU", 600, 525);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition1.x, shirtTextPosition1.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition2.x, shirtTextPosition2.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition3.x, shirtTextPosition3.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition4.x, shirtTextPosition4.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition5.x, shirtTextPosition5.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition6.x, shirtTextPosition6.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition7.x, shirtTextPosition7.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition8.x, shirtTextPosition8.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition9.x, shirtTextPosition9.y);
+        text("THAT'S RATHER BIG ON YOU", shirtTextPosition10.x, shirtTextPosition10.y);
     }
 }
 
